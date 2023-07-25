@@ -8,7 +8,7 @@ import argparse
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-name", type=str, default="opt-125m")   # default is the smallest model
+    parser.add_argument("--model-name", type=str, default="opt-66b")   # default is the smallest model
     args = parser.parse_args()
     return args
 
