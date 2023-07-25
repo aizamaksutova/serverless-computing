@@ -20,9 +20,14 @@ int main(int argc, const char* argv[]) {
   // input_ids = [2, 25216, 47, 236, 16]
   // attention_mask = [1, 1, 1, 1, 1]
   std::vector<torch::jit::IValue> inputs;
-  inputs.push_back(torch::tensor({2, 25216, 47, 236, 16}).reshape({1, 5}));
-  inputs.push_back(torch::tensor({1, 1, 1, 1, 1}).reshape({1, 5}));
+  std::vector<torch::jit::IValue> inputs;
 
+  torch::Tensor input_ids = torch::tensor({2, 25216, 47, 236, 16}).unsqueeze(0).repeat({256, 1});
+  torch::Tensor attention_mask = torch::tensor({1, 1, 1, 1, 1}).unsqueeze(0).repeat({256, 1});
+  
+  inputs.push_back(input_ids);
+  inputs.push_back(attention_mask);
+  
   std::vector<double> inferenceTimings; // Vector to store inference timings
 
   // Perform 1000 forward passes and measure the inference timings
